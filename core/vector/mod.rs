@@ -3,7 +3,15 @@ use crate::LimboError;
 use crate::Result;
 
 pub mod vector_types;
+mod diskann;
+
 use vector_types::*;
+
+/// VectorOutputRows holds information about result set of vector search operation.
+pub struct VectorOutputRows {
+    num_rows: usize,
+    num_cols: usize,
+}
 
 pub fn vector32(args: &[OwnedValue]) -> Result<OwnedValue> {
     if args.len() != 1 {
