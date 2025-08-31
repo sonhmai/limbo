@@ -1,0 +1,24 @@
+[package]
+name = "turso_geoh3"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Turso h3 geo index extension"
+
+# Crate must be of type `cdylib` if linked dynamically
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+static = ["turso_ext/static"]
+
+[dependencies]
+turso_ext = { path = "../core", features = ["static"] }
+h3o = "0.8.0"
+
+# mimalloc is required if you intend on linking dynamically
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+mimalloc = { version = "0.1", default-features = false }
+
